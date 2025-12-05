@@ -10,10 +10,10 @@ This project was developed as a technical assignment.
 ## 🚀 Features
 
 - Accepts two Base64 PDF inputs: `pdf1_base64` and `pdf2_base64`
-- Validates Base64 input and PDF structure
-- Decodes → Merges → Re-encodes entirely in memory
-- Appends **PDF 2 after PDF 1**
-- Returns the merged PDF as a Base64 string
+- Validates Base64 input and PDF structure  
+- Decodes → Merges → Re-encodes entirely in memory  
+- Appends **PDF 2 after PDF 1**  
+- Returns the merged PDF as a Base64 string  
 - Handles:
   - Invalid Base64  
   - Corrupted PDF bytes  
@@ -107,6 +107,57 @@ python test_merge_debug.py
 Test output:
 ```
 merged.pdf
+```
+
+---
+
+## 🧪 Example Postman Request & Response
+
+Below is a real example of testing the API through **Postman**.
+
+### 📨 POST Request
+**URL:**
+```
+http://127.0.0.1:8000/merge-pdfs
+```
+
+**Headers:**
+```
+Content-Type: application/json
+```
+
+**Body (JSON):**
+```json
+{
+  "pdf1_base64": "PASTE_BASE64_FROM_b1.txt_HERE",
+  "pdf2_base64": "PASTE_BASE64_FROM_b2.txt_HERE"
+}
+```
+
+---
+
+### ✅ Successful Response (200 OK)
+
+```json
+{
+  "merged_pdf_base64": "JVBERi0xLjMKJeLjz9MKM.......(very long string)"
+}
+```
+
+To convert this back into a PDF:
+
+```python
+import base64
+
+merged_b64 = "PASTE_MERGED_BASE64_HERE"
+
+with open("merged_postman.pdf", "wb") as f:
+    f.write(base64.b64decode(merged_b64))
+```
+
+This will generate:
+```
+merged_postman.pdf
 ```
 
 ---
